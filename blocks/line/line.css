@@ -1,4 +1,7 @@
 .line {
-  color: #545454;
   margin:0;
+  border: none;
+  color: #545454;
+  background-color: #545454;
+  height: 1px;
 }

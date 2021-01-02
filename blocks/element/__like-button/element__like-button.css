@@ -1,7 +1,10 @@
 .element__like-button {
   display: block;
-  margin-left: auto;/*
-  width: 22px;
-  height: 19px;
-  justify-self: center; */
+  margin-left: auto;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.element__like-button:hover {
+  opacity: 0.5;
 }

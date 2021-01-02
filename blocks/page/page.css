@@ -3,6 +3,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  min-width: 320px;
-  background-color: black;
+  background-color: black;/*
+  min-width: 320px; */
 }

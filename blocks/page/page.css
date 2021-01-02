@@ -4,4 +4,5 @@
   -webkit-font-smoothing: antialiased;
   position: relative;
   min-width: 320px;
+  background-color: black;
 }

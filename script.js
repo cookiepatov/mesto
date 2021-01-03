@@ -24,7 +24,7 @@ function renderFormInfo() {
 function toggleForm() {
   if (editForm.classList.contains('hidden')) {
     editForm.classList.remove('hidden');
-    body.classList.add('noScroll');
+    body.classList.add('no-scroll');
     renderFormInfo();
   }
   else {

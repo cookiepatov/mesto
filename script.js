@@ -4,6 +4,7 @@ const closeFormBtn = document.querySelector('.edit-form__close-button');
 const submitFormBtn = document.querySelector('.edit-form__submit-button');
 const likesContainer = document.querySelectorAll('.element__like-button');
 const body = document.querySelector('.body');
+const overlay = document.querySelector('.edit-form__overlay');
 
 const form = {
   name: document.querySelector('.edit-form__input_type_name'),
@@ -44,6 +45,7 @@ function init () {
   openFormBtn.addEventListener('click', toggleForm);
   closeFormBtn.addEventListener('click', toggleForm);
   submitFormBtn.addEventListener('click', submitForm);
+  overlay.addEventListener('click', toggleForm);
   for(let i=0;i<likesContainer.length;i++)
   {
     likesContainer[i].addEventListener('click', function() {

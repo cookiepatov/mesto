@@ -11,6 +11,14 @@
 
 @import url(../blocks/line/line.css);
 
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__overlay/edit-form__overlay.css);
+@import url(../blocks/edit-form/__window/edit-form__window.css);
+@import url(../blocks/edit-form/__title/edit-form__title.css);
+@import url(../blocks/edit-form/__input/edit-form__input.css);
+@import url(../blocks/edit-form/__submit-button/edit-form__submit-button.css);
+@import url(../blocks/edit-form/__close-button/edit-form__close-button.css);
+
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);

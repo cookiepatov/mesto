@@ -1,0 +1,20 @@
+.edit-form__close-button {
+  position: absolute;
+  left: calc(50% + 210px);
+  top: calc(50% - 220px);
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+
+.edit-form__close-button:hover {
+  opacity: 0.6;
+}
+
+
+@media screen and (max-width: 560px) {
+  .edit-form__close-button {
+    left: calc(50% + 90px);
+    top: calc(50% - 220px);
+  }
+}

@@ -3,7 +3,6 @@
   align-self: center;
   display: grid;
   grid-template-columns: auto min-content;
-
 }
 
 
@@ -15,3 +14,5 @@
     max-width: 90%;
   }
 }
+
+

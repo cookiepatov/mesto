@@ -2,6 +2,7 @@ const editForm = document.querySelector('.edit-form');
 const openFormBtn = document.querySelector('.profile__edit-button');
 const closeFormBtn = document.querySelector('.edit-form__close-button');
 const submitFormBtn = document.querySelector('.edit-form__submit-button');
+const likesContainer = document.querySelectorAll('.element__like-button');
 
 const form = {
   name: document.querySelector('.edit-form__input_type_name'),
@@ -23,7 +24,7 @@ function toggleForm() {
     editForm.classList.remove('hidden');
     renderFormInfo();
   }
-  else   {
+  else {
     editForm.classList.add('hidden');
   }
 }
@@ -40,6 +41,17 @@ function init () {
   openFormBtn.addEventListener('click', toggleForm);
   closeFormBtn.addEventListener('click', toggleForm);
   submitFormBtn.addEventListener('click', submitForm);
+  for(let i=0;i<likesContainer.length;i++)
+  {
+    likesContainer[i].addEventListener('click', function() {
+      if (likesContainer[i].classList.contains('element__like-button_active')) {
+        likesContainer[i].classList.remove('element__like-button_active');
+      }
+      else {
+        likesContainer[i].classList.add('element__like-button_active');
+      }
+    })
+  }
 }
 
 init();

@@ -3,6 +3,7 @@ const openFormBtn = document.querySelector('.profile__edit-button');
 const closeFormBtn = document.querySelector('.edit-form__close-button');
 const submitFormBtn = document.querySelector('.edit-form__submit-button');
 const likesContainer = document.querySelectorAll('.element__like-button');
+const body = document.querySelector('.body');
 
 const form = {
   name: document.querySelector('.edit-form__input_type_name'),
@@ -22,10 +23,12 @@ function renderFormInfo() {
 function toggleForm() {
   if (editForm.classList.contains('hidden')) {
     editForm.classList.remove('hidden');
+    body.classList.add('noScroll');
     renderFormInfo();
   }
   else {
     editForm.classList.add('hidden');
+    body.classList.remove('noScroll');
   }
 }
 

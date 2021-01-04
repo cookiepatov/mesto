@@ -5,6 +5,10 @@
   margin-left: 18px;
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  background-image: url(../../../images/Edit-Button.svg);
+  background-size: cover;
 }
 
 .profile__edit-button:hover {

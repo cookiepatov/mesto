@@ -55,8 +55,8 @@ function submitForm(e) {
 function init () {
   openFormBtn.addEventListener('click', openForm);
   closeFormBtn.addEventListener('click', closeForm);
-  submitFormBtn.addEventListener('click', submitForm);
-  popup.addEventListener('click', overlayClick);
+  popup.addEventListener('submit', submitForm);
+  popup.addEventListener('mousedown', overlayClick);
   for(let i=0;i<likesContainer.length;i++)
   {
     likesContainer[i].addEventListener('click', function() {

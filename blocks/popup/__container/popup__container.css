@@ -1,9 +1,6 @@
 .popup__container {
-  position: fixed;
-  z-index: 1;
-  width: 358px;
-  left: calc(50% - 215px);
-  top: calc(50% - 170px);
+  margin: auto;
+  max-width: 358px;
   background-color: white;
   border-radius: 10px;
   padding-left: 36px;
@@ -18,9 +15,7 @@
     padding-right: 22px;
     padding-top: 25px;
     padding-bottom: 25px;
-    width: 238px;
-    left: calc(50% - 141px);
-    top: calc(50% - 161px);
+    max-width: 238px;
 
   }
 }

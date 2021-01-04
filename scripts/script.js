@@ -57,17 +57,12 @@ function init () {
   closeFormBtn.addEventListener('click', closeForm);
   popup.addEventListener('submit', submitForm);
   popup.addEventListener('mousedown', overlayClick);
-  for(let i=0;i<likesContainer.length;i++)
-  {
-    likesContainer[i].addEventListener('click', function() {
-      if (likesContainer[i].classList.contains('element__like-button_active')) {
-        likesContainer[i].classList.remove('element__like-button_active');
-      }
-      else {
-        likesContainer[i].classList.add('element__like-button_active');
-      }
+
+  likesContainer.forEach(likeBtn => {
+    likeBtn.addEventListener('click', function() {
+      likeBtn.classList.toggle('element__like-button_active');
     })
-  }
+  });
 }
 
 init();

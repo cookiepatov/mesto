@@ -1,4 +1,4 @@
-.edit-form__overlay {
+.popup__overlay {
   position: fixed;
   background-color: black;
   opacity: 0.5;

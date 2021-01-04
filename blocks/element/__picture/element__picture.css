@@ -18,7 +18,6 @@
   }
 }
 
-
 @media screen and (max-width:420px) {
   .element__picture {
     height: calc(100vw - 38px);

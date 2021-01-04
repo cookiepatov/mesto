@@ -17,20 +17,7 @@
       <hr class="line">
     </header>
     <main class="content">
-      <section class="edit-form hidden">
-        <div class="edit-form__overlay"></div>
-        <form class="edit-form__window">
-          <h1 class="edit-form__title">
-            Редактировать профиль
-          </h1>
-          <input class="edit-form__input edit-form__input_type_name" placeholder="Ваше имя">
-          <hr class="line">
-          <input class="edit-form__input edit-form__input_type_description" placeholder="Описание">
-          <hr class="line">
-          <input class="edit-form__submit-button" type="submit" value="Сохранить">
-          <img src="images/Close-Icon.svg" alt="Закрыть форму" class="edit-form__close-button">
-        </form>
-      </section>
+
       <section class="profile">
         <img src="./images/avatar.jpg" class="profile__avatar" alt="Аватар пользователя">
         <div class="profile__info">
@@ -87,7 +74,23 @@
 
     </main>
     <footer class="footer">
-      &copy; 2020 Mesto Russia
+      <p class="copyright">
+        &copy; 2020 Mesto Russia
+      </p>
+      <section class="popup hidden">
+        <div class="popup__overlay"></div>
+        <form class="popup__window">
+          <h1 class="popup__title">
+            Редактировать профиль
+          </h1>
+          <input class="popup__input popup__input_type_name" placeholder="Ваше имя">
+          <hr class="line">
+          <input class="popup__input popup__input_type_description" placeholder="Описание">
+          <hr class="line">
+          <input class="popup__submit-button" type="submit" value="Сохранить">
+          <img src="images/Close-Icon.svg" alt="Закрыть форму" class="popup__close-button">
+        </form>
+      </section>
     </footer>
   </div>
   <script src="./scripts/script.js"></script>

@@ -1,14 +1,14 @@
-const editForm = document.querySelector('.edit-form');
+const editForm = document.querySelector('.popup');
 const openFormBtn = document.querySelector('.profile__edit-button');
-const closeFormBtn = document.querySelector('.edit-form__close-button');
-const submitFormBtn = document.querySelector('.edit-form__submit-button');
+const closeFormBtn = document.querySelector('.popup__close-button');
+const submitFormBtn = document.querySelector('.popup__submit-button');
 const likesContainer = document.querySelectorAll('.element__like-button');
 const body = document.querySelector('.body');
-const overlay = document.querySelector('.edit-form__overlay');
+const overlay = document.querySelector('.popup__overlay');
 
 const form = {
-  name: document.querySelector('.edit-form__input_type_name'),
-  description: document.querySelector('.edit-form__input_type_description')
+  name: document.querySelector('.popup__input_type_name'),
+  description: document.querySelector('.popup__input_type_description')
 }
 
 const profile = {
@@ -29,7 +29,7 @@ function toggleForm() {
   }
   else {
     editForm.classList.add('hidden');
-    body.classList.remove('noScroll');
+    body.classList.remove('no-scroll');
   }
 }
 

@@ -1,4 +1,4 @@
-const editForm = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 const openFormBtn = document.querySelector('.profile__edit-button');
 const closeFormBtn = document.querySelector('.popup__close-button');
 const submitFormBtn = document.querySelector('.popup__submit-button');
@@ -21,14 +21,19 @@ function renderFormInfo() {
   form.description.value = profile.description.innerText
 }
 
-function toggleForm() {
-  if (editForm.classList.contains('hidden')) {
-    editForm.classList.remove('hidden');
-    body.classList.add('no-scroll');
-    renderFormInfo();
+function openForm() {
+  if (popup.classList.contains('popup_opened')) {
+    return;
   }
   else {
-    editForm.classList.add('hidden');
+    popup.classList.add('popup_opened');
+    body.classList.add('no-scroll');
+  }
+}
+
+function closeForm() {
+  if (popup.classList.contains('popup_opened')) {
+    popup.classList.remove('popup_opened');
     body.classList.remove('no-scroll');
   }
 }
@@ -42,10 +47,10 @@ function submitForm(e) {
 
 
 function init () {
-  openFormBtn.addEventListener('click', toggleForm);
-  closeFormBtn.addEventListener('click', toggleForm);
+  openFormBtn.addEventListener('click', openForm);
+  closeFormBtn.addEventListener('click', closeForm);
   submitFormBtn.addEventListener('click', submitForm);
-  overlay.addEventListener('click', toggleForm);
+  overlay.addEventListener('click', closeForm);
   for(let i=0;i<likesContainer.length;i++)
   {
     likesContainer[i].addEventListener('click', function() {

@@ -21,6 +21,12 @@ function renderFormInfo() {
   form.description.value = profile.description.innerText
 }
 
+function overlayClick(e) {
+  if (e.target.classList.contains('popup')) {
+    closeForm();
+  }
+}
+
 function openForm() {
   if (popup.classList.contains('popup_opened')) {
     return;
@@ -50,7 +56,7 @@ function init () {
   openFormBtn.addEventListener('click', openForm);
   closeFormBtn.addEventListener('click', closeForm);
   submitFormBtn.addEventListener('click', submitForm);
-  overlay.addEventListener('click', closeForm);
+  popup.addEventListener('click', overlayClick);
   for(let i=0;i<likesContainer.length;i++)
   {
     likesContainer[i].addEventListener('click', function() {

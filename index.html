@@ -78,17 +78,17 @@
         &copy; 2020 Mesto Russia
       </p>
       <section class="popup">
-        <form class="popup__window">
-          <h1 class="popup__title">
+        <div class="popup__container">
+          <h2 class="popup__title">
             Редактировать профиль
-          </h1>
-          <input class="popup__input popup__input_type_name" placeholder="Ваше имя">
-          <hr class="line">
-          <input class="popup__input popup__input_type_description" placeholder="Описание">
-          <hr class="line">
-          <input class="popup__submit-button" type="submit" value="Сохранить">
-          <img src="images/Close-Icon.svg" alt="Закрыть форму" class="popup__close-button">
-        </form>
+          </h2>
+          <form class="popup__form" name="edit-profile-info">
+            <input name="profile-name" required class="popup__input popup__input_type_name" placeholder="Ваше имя">
+            <input name="profile-description" required class="popup__input popup__input_type_description" placeholder="Описание">
+            <input type="submit" class="popup__submit-button" value="Сохранить">
+          </form>
+          <input type="button" class="popup__close-button">
+        </div>
       </section>
     </footer>
   </div>

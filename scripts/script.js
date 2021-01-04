@@ -4,7 +4,6 @@ const closeFormBtn = document.querySelector('.popup__close-button');
 const submitFormBtn = document.querySelector('.popup__submit-button');
 const likesContainer = document.querySelectorAll('.element__like-button');
 const body = document.querySelector('.body');
-const overlay = document.querySelector('.popup__overlay');
 
 const form = {
   name: document.querySelector('.popup__input_type_name'),
@@ -32,6 +31,7 @@ function openForm() {
     return;
   }
   else {
+    renderFormInfo()
     popup.classList.add('popup_opened');
     body.classList.add('no-scroll');
   }
@@ -48,7 +48,7 @@ function submitForm(e) {
   e.preventDefault();
   profile.name.innerText = form.name.value;
   profile.description.innerText = form.description.value;
-  toggleForm();
+  closeForm();
 }
 
 

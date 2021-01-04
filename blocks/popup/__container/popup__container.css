@@ -1,4 +1,4 @@
-.popup__window {
+.popup__container {
   position: fixed;
   z-index: 1;
   width: 358px;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 560px) {
-  .popup__window {
+  .popup__container {
     padding-left: 22px;
     padding-right: 22px;
     padding-top: 25px;

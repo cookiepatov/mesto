@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup');
+const popupForm = document.querySelector('.popup__form');
 const openFormBtn = document.querySelector('.profile__edit-button');
 const closeFormBtn = document.querySelector('.popup__close-button');
-const submitFormBtn = document.querySelector('.popup__submit-button');
 const likesContainer = document.querySelectorAll('.element__like-button');
 const body = document.querySelector('.body');
 
@@ -55,8 +55,8 @@ function submitForm(e) {
 function init () {
   openFormBtn.addEventListener('click', openForm);
   closeFormBtn.addEventListener('click', closeForm);
-  popup.addEventListener('submit', submitForm);
-  popup.addEventListener('mousedown', overlayClick);
+  popupForm.addEventListener('submit', submitForm);
+  popup.addEventListener('click', overlayClick);
 
   likesContainer.forEach(likeBtn => {
     likeBtn.addEventListener('click', function() {

@@ -6,10 +6,10 @@
   width: 56.57px;
   height: 56.57px;
   position: absolute;
-  left: calc(50% + 210px);
-  top: calc(50% - 230px);
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;
+  top: -50px;
+  right: -50px;
 }
 
 
@@ -20,9 +20,9 @@
 
 @media screen and (max-width: 560px) {
   .popup__close-button {
-    left: calc(50% + 105px);
-    top: calc(50% - 230px);
     width: 36.77px;
     height: 36.77px;
+    top: -30px;
+    right: -30px;
   }
 }

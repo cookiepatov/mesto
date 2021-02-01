@@ -6,8 +6,12 @@ const popupCard = document.querySelector('.popup_type_card');
 const popupCardForm = popupCard.querySelector('.popup__form');
 const closeCardFormBtn = popupCard.querySelector('.popup__close-button');
 
+const popupFullView = document.querySelector('.popup_type_full-view');
+const closeFullViewBtn = popupFullView.querySelector('.popup__close-button');
+
 const openFormBtn = document.querySelector('.profile__edit-button');
 const addCardBtn = document.querySelector('.profile__add-button');
+
 const body = document.querySelector('.body');
 const cardTemplate = document.querySelector('#card-template');
 const elements = document.querySelector('.elements');
@@ -57,7 +61,7 @@ function renderProfileFormInfo() {
 
 function overlayClick(e) {
   if (e.target.classList.contains('popup')) {
-    closeForm();
+    e.target.classList.remove('popup_opened');
   }
 }
 
@@ -80,6 +84,9 @@ function addCard(link, name) {
   newCard.querySelector('.element__like-button').addEventListener('click',function() {
     this.classList.toggle('element__like-button_active')});
   newCard.querySelector('.element__delete-button').addEventListener('click',deleteCard);
+  newCard.querySelector('.element__picture-button').addEventListener('click',function(){
+    openFullView(link, name);
+  })
   elements.prepend(newCard);
 
 }
@@ -138,6 +145,22 @@ function submitCardForm(e) {
 }
 
 
+function openFullView(link, name) {
+  body.classList.add('no-scroll');
+  popupFullView.querySelector('.popup__full-picture').src=link;
+  popupFullView.querySelector('.popup__full-picture').alt=name;
+  popupFullView.querySelector('.popup__picture-title').textContent=name;
+  popupFullView.classList.add('popup_opened');
+}
+
+function closeFullView() {
+  if (popupFullView.classList.contains('popup_opened')) {
+    popupFullView.classList.remove('popup_opened');
+    body.classList.remove('no-scroll');
+  }
+
+}
+
 function init () {
   renderInitialCards(initialCards);
   openFormBtn.addEventListener('click', openProfileForm);
@@ -149,6 +172,10 @@ function init () {
   closeCardFormBtn.addEventListener('click', closeCardForm);
   popupCardForm.addEventListener('submit', submitCardForm);
   popupCard.addEventListener('click', overlayClick);
+
+
+  closeFullViewBtn.addEventListener('click',closeFullView);
+  popupFullView.addEventListener('click',overlayClick);
 }
 
 init();

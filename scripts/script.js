@@ -67,6 +67,11 @@ function renderInitialCards(array) {
   })
 }
 
+function deleteCard(e)
+{
+  e.target.closest('.element').remove();
+}
+
 function addCard(link, name) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   newCard.querySelector('.element__picture').src=link;
@@ -74,7 +79,8 @@ function addCard(link, name) {
   newCard.querySelector('.element__text').textContent=name;
   newCard.querySelector('.element__like-button').addEventListener('click',function() {
     this.classList.toggle('element__like-button_active')});
-  elements.append(newCard);
+  newCard.querySelector('.element__delete-button').addEventListener('click',deleteCard);
+  elements.prepend(newCard);
 
 }
 
@@ -119,6 +125,7 @@ function closeCardForm() {
   if (popupCard.classList.contains('popup_opened')) {
     popupCard.classList.remove('popup_opened');
     body.classList.remove('no-scroll');
+    popupCardForm.reset();
   }
 }
 
@@ -127,6 +134,7 @@ function submitCardForm(e) {
   const name = popupCardForm.querySelector('.popup__input_type_name').value;
   const link = popupCardForm.querySelector('.popup__input_type_data').value;
   addCard(link, name);
+  closeCardForm();
 }
 
 

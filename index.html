@@ -28,6 +28,7 @@
       <template id="card-template">
         <figure class="element">
             <img class="element__picture">
+            <button type="button" class="element__delete-button"></button>
             <figcaption class="element__caption">
               <h2 class="element__text"></h2>
               <button type="button" class="element__like-button"></button>
@@ -46,7 +47,6 @@
         <h2 class="popup__title">
           Редактировать профиль
         </h2>
-        </template>
         <form class="popup__form" name="edit-profile-info">
           <input name="name" required class="popup__input popup__input_type_name" placeholder="Ваше имя">
           <input name="description" required class="popup__input popup__input_type_data" placeholder="Описание">
@@ -60,7 +60,6 @@
         <h2 class="popup__title">
           Новое место
         </h2>
-        </template>
         <form class="popup__form" name="edit-profile-info">
           <input name="name" required class="popup__input popup__input_type_name" placeholder="Название">
           <input name="data" required class="popup__input popup__input_type_data" placeholder="Ссылка на картинку">

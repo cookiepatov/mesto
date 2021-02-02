@@ -8,18 +8,18 @@
 
 @media screen and (max-width:960px) {
   .element__picture {
-    height: calc((100vw - 114px) / 3);
+    height: calc((100vw - 114px - var(--scrollbar-width)) / 3);
   }
 }
 
 @media screen and (max-width:690px) {
   .element__picture {
-    height: calc((100vw - 55px) / 2);
+    height: calc((100vw - 55px - var(--scrollbar-width)) / 2);
   }
 }
 
 @media screen and (max-width:420px) {
   .element__picture {
-    height: calc(100vw - 38px);
+    height: calc(100vw - 38px - var(--scrollbar-width));
   }
 }

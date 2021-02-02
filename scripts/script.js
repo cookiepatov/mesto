@@ -43,10 +43,22 @@ const initialCards = [
   }
 ];
 
+function renderInitialCards(array) {
+  array.forEach(element=>{
+    addCard(element.link, element.name)
+  })
+  //Ниже считаю ширину скроллбара, чтобы корректно высчитывать высоту элементов относительно ширины экрана в vw.
+  document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + "px");
+}
 
-const form = {
+const formProfile = {
   name: popupProfile.querySelector('.popup__input_type_name'),
   description: popupProfile.querySelector('.popup__input_type_data')
+}
+
+const formNewCard = {
+  name: popupCard.querySelector('.popup__input_type_name'),
+  data: popupCard.querySelector('.popup__input_type_data')
 }
 
 const profile = {
@@ -55,40 +67,39 @@ const profile = {
 }
 
 function renderProfileFormInfo() {
-  form.name.value = profile.name.innerText,
-  form.description.value = profile.description.innerText
+  formProfile.name.value = profile.name.innerText,
+  formProfile.description.value = profile.description.innerText
 }
 
 function overlayClick(e) {
   if (e.target.classList.contains('popup')) {
-    e.target.classList.remove('popup_opened');
+    closePopup(e);
   }
 }
 
-function renderInitialCards(array) {
-  array.forEach(element=>{
-    addCard(element.link, element.name)
-  })
-}
-
-function deleteCard(e)
+function errorHandler(e)
 {
-  e.target.closest('.element').remove();
+  console.log('Неккоректный url: ' + e.target.src);
+  e.target.src='https://images.unsplash.com/photo-1504930268766-d71549a36ec2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1307&q=80';
+
 }
 
 function addCard(link, name) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
-  newCard.querySelector('.element__picture').src=link;
-  newCard.querySelector('.element__picture').alt=name;
+  const pic = newCard.querySelector('.element__picture');
+  pic.src=link;
+  pic.alt=name;
+  pic.onerror = errorHandler;
   newCard.querySelector('.element__text').textContent=name;
-  newCard.querySelector('.element__like-button').addEventListener('click',function() {
+  newCard.querySelector('.element__like-button').addEventListener('click', function() {
     this.classList.toggle('element__like-button_active')});
-  newCard.querySelector('.element__delete-button').addEventListener('click',deleteCard);
-  newCard.querySelector('.element__picture-button').addEventListener('click',function(){
+  newCard.querySelector('.element__delete-button').addEventListener('click', function(e){
+    e.target.closest('.element').remove();
+  });
+  newCard.querySelector('.element__picture-button').addEventListener('click', function(){
     openFullView(link, name);
   })
   elements.prepend(newCard);
-
 }
 
 function openProfileForm() {
@@ -102,80 +113,67 @@ function openProfileForm() {
   }
 }
 
-function closeProfileForm() {
-
-  if (popupProfile.classList.contains('popup_opened')) {
-    popupProfile.classList.remove('popup_opened');
-    body.classList.remove('no-scroll');
-  }
-}
-
 function submitProfileForm(e) {
   e.preventDefault();
-  profile.name.innerText = form.name.value;
-  profile.description.innerText = form.description.value;
+  profile.name.innerText = formProfile.name.value;
+  profile.description.innerText = formProfile.description.value;
   closeProfileForm();
 }
 
+function closePopup(e) {
+  const popup=e.target.closest('.popup');
+  if (popup.classList.contains('popup_opened'))
+  {
+    popup.classList.remove('popup_opened');
+    body.classList.remove('no-scroll');
+  }
+}
 
 function openCardForm() {
   if (popupCard.classList.contains('popup_opened')) {
     return;
   }
   else {
+    popupCardForm.reset();
     popupCard.classList.add('popup_opened');
     body.classList.add('no-scroll');
   }
 }
 
-function closeCardForm() {
-  if (popupCard.classList.contains('popup_opened')) {
-    popupCard.classList.remove('popup_opened');
-    body.classList.remove('no-scroll');
-    popupCardForm.reset();
-  }
-}
-
 function submitCardForm(e) {
   e.preventDefault();
-  const name = popupCardForm.querySelector('.popup__input_type_name').value;
-  const link = popupCardForm.querySelector('.popup__input_type_data').value;
+  const name = formNewCard.name.value;
+  const link = formNewCard.data.value;
   addCard(link, name);
-  closeCardForm();
+  closePopup(e);
 }
 
 
 function openFullView(link, name) {
   body.classList.add('no-scroll');
-  popupFullView.querySelector('.popup__full-picture').src=link;
-  popupFullView.querySelector('.popup__full-picture').alt=name;
+  const pic = popupFullView.querySelector('.popup__full-picture');
+  pic.src=link;
+  pic.alt=name;
+  pic.onerror = errorHandler;
   popupFullView.querySelector('.popup__picture-title').textContent=name;
   popupFullView.classList.add('popup_opened');
 }
 
-function closeFullView() {
-  if (popupFullView.classList.contains('popup_opened')) {
-    popupFullView.classList.remove('popup_opened');
-    body.classList.remove('no-scroll');
-  }
-
-}
-
 function init () {
   renderInitialCards(initialCards);
+
   openFormBtn.addEventListener('click', openProfileForm);
-  closeProfileFormBtn.addEventListener('click', closeProfileForm);
+  closeProfileFormBtn.addEventListener('click', closePopup);
   popupProfileForm.addEventListener('submit', submitProfileForm);
   popupProfile.addEventListener('click', overlayClick);
 
   addCardBtn.addEventListener('click', openCardForm);
-  closeCardFormBtn.addEventListener('click', closeCardForm);
+  closeCardFormBtn.addEventListener('click', closePopup);
   popupCardForm.addEventListener('submit', submitCardForm);
   popupCard.addEventListener('click', overlayClick);
 
-
-  closeFullViewBtn.addEventListener('click',closeFullView);
-  popupFullView.addEventListener('click',overlayClick);
+  closeFullViewBtn.addEventListener('click', closePopup);
+  popupFullView.addEventListener('click', overlayClick);
 }
 
 init();

@@ -9,6 +9,7 @@
   margin-right: auto;
   padding-left: 40px;
   padding-right: 40px;
+  transition: 0.5s ease-in-out;
 }
 
 

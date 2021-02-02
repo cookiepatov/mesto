@@ -25,18 +25,6 @@
       </section>
 
       <section class="elements">
-      <template id="card-template">
-        <figure class="element">
-          <button class="element__picture-button">
-            <img class="element__picture">
-          </button>
-            <button type="button" class="element__delete-button"></button>
-            <figcaption class="element__caption">
-              <h2 class="element__text"></h2>
-              <button type="button" class="element__like-button"></button>
-            </figcaption>
-          </figure>
-        </template>
       </section>
     </main>
     <footer class="footer">
@@ -82,7 +70,19 @@
       </figure>
     </section>
   </div>
-  <script src="./scripts/script.js"></script>
+  <template id="card-template">
+    <figure class="element">
+      <button class="element__picture-button">
+        <img class="element__picture">
+      </button>
+        <button type="button" class="element__delete-button"></button>
+        <figcaption class="element__caption">
+          <h2 class="element__text"></h2>
+          <button type="button" class="element__like-button"></button>
+        </figcaption>
+      </figure>
+    </template>
+  <script src="./scripts/script.js" type="module"></script>
 </body>
 
 </html>

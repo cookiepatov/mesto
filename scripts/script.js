@@ -24,8 +24,6 @@ function renderInitialCards(array) {
     const card = createCard(element.link, element.name);
     addCard(card);
   })
-  //Ниже считаю ширину скроллбара, чтобы корректно высчитывать высоту элементов относительно ширины экрана в vw.
-  document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + "px");
 }
 
 const formProfile = {
@@ -81,28 +79,6 @@ function addCard(card) {
   elements.prepend(card);
 }
 
-function submitProfileForm(e) {
-  e.preventDefault();
-  profile.name.innerText = formProfile.name.value;
-  profile.description.innerText = formProfile.description.value;
-  closePopup(e);
-}
-
-function closePopup(e) {
-  const popup=e.target.closest('.popup');
-  popup.classList.remove('popup_opened');
-  body.classList.remove('no-scroll');
-}
-
-function submitCardForm(e) {
-  e.preventDefault();
-  const name = formNewCard.name.value;
-  const link = formNewCard.data.value;
-  const card = createCard(link, name);
-  addCard(card);
-  closePopup(e);
-}
-
 function openPopup(popup, link='', name='') {
   body.classList.add('no-scroll');
   popup.classList.add('popup_opened');
@@ -119,6 +95,28 @@ function openPopup(popup, link='', name='') {
   }
 }
 
+function closePopup(e) {
+  const popup=e.target.closest('.popup');
+  popup.classList.remove('popup_opened');
+  body.classList.remove('no-scroll');
+}
+
+function submitProfileForm(e) {
+  e.preventDefault();
+  profile.name.innerText = formProfile.name.value;
+  profile.description.innerText = formProfile.description.value;
+  closePopup(e);
+}
+
+function submitCardForm(e) {
+  e.preventDefault();
+  const name = formNewCard.name.value;
+  const link = formNewCard.data.value;
+  const card = createCard(link, name);
+  addCard(card);
+  closePopup(e);
+}
+
 function resetCardPopup() {
   popupCardForm.reset();
 }
@@ -131,8 +129,14 @@ function renderFullView(link, name) {
   popupFullView.querySelector('.popup__picture-title').textContent = name;
 }
 
+function setScrollbarWidth() {
+  document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + "px");
+}
+
 function init () {
   renderInitialCards(initialCards);
+
+  setScrollbarWidth();
 
   popups.forEach((popup) => popup.addEventListener('pointerdown',overlayClick));
   closeBtns.forEach((btn) => btn.addEventListener('click', closePopup));

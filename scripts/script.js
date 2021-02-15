@@ -84,8 +84,25 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+function escapeHandler(e) {
+  if(e.key==='Escape'){
+    popups.forEach(popup => {
+      if(popup.classList.contains('popup_opened'))
+      {
+        closePopup(popup);
+      }
+    });
+  }
+}
+
 function closePopup(e) {
-  const popup=e.target.closest('.popup');
+  let popup;
+  if(e.target){
+    popup=e.target.closest('.popup');
+  }
+  else {
+    popup=e;
+  }
   popup.classList.remove('popup_opened');
   body.classList.remove('no-scroll');
 }
@@ -132,6 +149,8 @@ function init () {
     const closeBtn = popup.querySelector('.popup__close-button');
     closeBtn.addEventListener('click', closePopup);
   });
+
+  document.addEventListener('keydown',escapeHandler);
 
   openFormBtn.addEventListener('click',()=>{
     openPopup(popupProfile);

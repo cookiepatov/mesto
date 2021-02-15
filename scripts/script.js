@@ -11,6 +11,9 @@ const popupCard = document.querySelector('.popup_type_card');
 const popupCardForm = popupCard.querySelector('.popup__form');
 
 const popupFullView = document.querySelector('.popup_type_full-view');
+const fullPic = popupFullView.querySelector('.popup__full-picture');
+const fullViewTitle = popupFullView.querySelector('.popup__picture-title');
+
 const openFormBtn = document.querySelector('.profile__edit-button');
 const addCardBtn = document.querySelector('.profile__add-button');
 
@@ -82,17 +85,14 @@ function addCard(card) {
 function openPopup(popup) {
   body.classList.add('no-scroll');
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown',escapeHandler);
 }
 
 function escapeHandler(e) {
   if(e.key==='Escape'){
-    popups.forEach(popup => {
-      if(popup.classList.contains('popup_opened'))
-      {
-        closePopup(popup);
-      }
-    });
-  }
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
 }
 
 function closePopup(e) {
@@ -105,6 +105,7 @@ function closePopup(e) {
   }
   popup.classList.remove('popup_opened');
   body.classList.remove('no-scroll');
+  document.removeEventListener('keydown',escapeHandler);
 }
 
 function submitProfileForm(e) {
@@ -128,11 +129,10 @@ function resetCardPopup() {
 }
 
 function renderFullView(link, name) {
-  const pic = popupFullView.querySelector('.popup__full-picture');
-  pic.src = link;
-  pic.alt = name;
-  pic.onerror = errorHandler;
-  popupFullView.querySelector('.popup__picture-title').textContent = name;
+  fullPic.src = link;
+  fullPic.alt = name;
+  fullPic.onerror = errorHandler;
+  fullViewTitle.textContent = name;
 }
 
 function setScrollbarWidth() {
@@ -149,8 +149,6 @@ function init () {
     const closeBtn = popup.querySelector('.popup__close-button');
     closeBtn.addEventListener('click', closePopup);
   });
-
-  document.addEventListener('keydown',escapeHandler);
 
   openFormBtn.addEventListener('click',()=>{
     openPopup(popupProfile);

@@ -1,74 +1,59 @@
-
-const showErrorMessage = (inputElement, errorElement, errorText, settings) => {
-  inputElement.classList.add(settings.inputErrorClass);
-  errorElement.classList.add(settings.errorClass);
-  errorElement.textContent=errorText;
-}
-
-const hideErrorMessage = (inputElement, errorElement, settings) => {
-  inputElement.classList.remove(settings.inputErrorClass);
-  errorElement.classList.remove(settings.errorClass);
-  errorElement.textContent = '';
-}
-
-const validateInput = (inputElement, form, settings) => {
-  const validationState = inputElement.validity.valid;
-  const errorMsg = form.querySelector(`.${inputElement.id}-error`);
-  const errorText = inputElement.validationMessage;
-  if(validationState) {
-    hideErrorMessage(inputElement, errorMsg, settings);
+export class FormValidator {
+  constructor(settings, formElement) {
+    this._formElement = formElement;
+    this._inputSelector = settings.inputSelector;
+    this._submitButtonSelector = settings.submitButtonSelector;
+    this._inputErrorClass = settings.inputErrorClass;
+    this._errorClass = settings.errorClass;
   }
-  else {
-    showErrorMessage(inputElement, errorMsg, errorText, settings);
-  }
-}
-
-const validateForm = (inputList, form, settings) => {
-  const inputsValidity = inputList.map(input=>input.validity.valid);
-  const validationState = inputsValidity.every(state=>{return state===true});
-  setFormState(form, validationState, settings);
-}
-
-const enableButton = (button) => {
-  button.disabled = false;
-}
-
-const disableButton = (button) => {
-  button.disabled = true;
-}
-
-const setFormState = (form, validationState, settings) => {
-  const button = form.querySelector(settings.submitButtonSelector);
-  if(validationState) {
-    enableButton(button);
-  }
-  else {
-    disableButton(button);
-  }
-}
-
-const enableValidation = (settings) => {
-  const forms = Array.from(document.querySelectorAll(settings.formSelector));
-  forms.forEach(form=>{
-    const inputList = Array.from(form.querySelectorAll(settings.inputSelector));
-    inputList.forEach(input=>{
-      input.addEventListener('input',function(){
-        validateInput(input, form, settings);
-        validateForm(inputList, form, settings);
+  enableValidation() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    inputList.forEach(input => {
+      input.addEventListener('input', () => {
+        this._validateInput(input);
+        this._validateForm(inputList);
       })
     })
-  })
-};
-
-const init = () => {
-  const settings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible',
-  };
-  enableValidation(settings);
+  }
+  _validateInput(input) {
+    const validationState = input.validity.valid;
+    const errorMsg = this._formElement.querySelector(`.${input.id}-error`);
+    const errorText = input.validationMessage;
+    if(validationState) {
+      this._hideErrorMessage(input, errorMsg);
+    }
+    else {
+      this._showErrorMessage(input, errorMsg, errorText);
+    }
+  }
+  _validateForm(inputList) {
+    const inputsValidity = inputList.map(input=>input.validity.valid);
+    const validationState = inputsValidity.every(state=>{return state===true});
+    this._setFormState(validationState);
+  }
+  _setFormState(validationState){
+    const button = this._formElement.querySelector(this._submitButtonSelector);
+    if(validationState) {
+      this._enableButton(button);
+    }
+    else {
+      this._disableButton(button);
+    }
+  }
+  _showErrorMessage(input, errorElement, errorText) {
+    input.classList.add(this._inputErrorClass);
+    errorElement.classList.add(this._errorClass);
+    errorElement.textContent=errorText;
+  }
+  _hideErrorMessage(input, errorElement) {
+    input.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
+    errorElement.textContent = '';
+  }
+  _enableButton (button) {
+    button.disabled = false;
+  }
+  _disableButton (button) {
+    button.disabled = true;
+  }
 }
-
-init();

@@ -1,7 +1,7 @@
-import { Card } from './card.js';
+import { Card } from './Card.js';
 import { initialCards } from './data/cards-data.js';
 import { settings } from './data/validation-settings.js'
-import { FormValidator } from './validate.js';
+import { FormValidator } from './FormValidator.js';
 
 const forms = Array.from(document.querySelectorAll(settings.formSelector));
 
@@ -46,8 +46,7 @@ const profile = {
 
 function renderInitialCards(array) {
   array.forEach(element=>{
-    const cardElement = new Card(element, cardTemplateSelector, openPopup, renderFullView)
-    const card = cardElement.createCard();
+    const card = createCard(element);
     addCard(card);
   })
 }
@@ -65,7 +64,6 @@ function setScrollbarWidth() {
 }
 
 
-
 //Отображение контента попапов
 
 
@@ -75,10 +73,11 @@ function renderProfileFormInfo() {
 }
 
 
-function renderFullView(link, name) {
+function setFullView(link, name) {
   fullPic.src = link;
   fullPic.alt = name;
   fullViewTitle.textContent = name;
+  openPopup(popupFullView);
 }
 
 //Работа с попапами
@@ -118,11 +117,16 @@ function submitProfileForm(e) {
 
 function submitCardForm(e) {
   e.preventDefault();
-  const element = {name: formNewCard.name.value, link: formNewCard.data.value}
-  const cardElement = new Card(element, cardTemplateSelector, openPopup, renderFullView)
-  const card = cardElement.createCard();
+  const element = {name: formNewCard.name.value, link: formNewCard.data.value};
+  const card = createCard(element);
   addCard(card);
   closePopup();
+}
+
+
+function createCard(element) {
+  const cardElement = new Card(element, cardTemplateSelector, setFullView)
+  return cardElement.createCard();
 }
 
 function addCard(card) {
@@ -132,7 +136,6 @@ function addCard(card) {
 function resetCardPopup() {
   popupCardForm.reset();
 }
-
 
 
 function init () {

@@ -1,10 +1,9 @@
 export class Card {
-    constructor(data, selector, openPopup, renderFullView) {
-        this._openPopup = openPopup;
+    constructor(data, selector, setFullView) {
         this._name = data.name;
         this._link = data.link;
         this._selector = selector;
-        this._renderFullView = renderFullView;
+        this._setFullView = setFullView;
     }
     _getCardFromTemplate() {
         const cardElement = document.querySelector(this._selector).content.cloneNode(true);
@@ -34,8 +33,6 @@ export class Card {
         e.target.closest('.element').remove();
     }
     _handleOpenPopup() {
-        const popupFullView = document.querySelector('.popup_type_full-view');
-        this._openPopup(popupFullView);
-        this._renderFullView(this._link, this._name);
+        this._setFullView(this._link, this._name);
     }
 }

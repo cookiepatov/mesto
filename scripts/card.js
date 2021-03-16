@@ -5,10 +5,12 @@ export class Card {
         this._selector = selector;
         this._setFullView = setFullView;
     }
+
     _getCardFromTemplate() {
         const cardElement = document.querySelector(this._selector).content.cloneNode(true);
         return cardElement
     }
+
     createCard() {
         this._newCard = this._getCardFromTemplate();
         const pic = this._newCard.querySelector(`.element__picture`);
@@ -18,6 +20,7 @@ export class Card {
         this._setEventListeners();
         return this._newCard;
       }
+
     _setEventListeners() {
         const heartBtn = this._newCard.querySelector(`.element__like-button`);
         const deleteBtn = this._newCard.querySelector(`.element__delete-button`);
@@ -26,12 +29,15 @@ export class Card {
         deleteBtn.addEventListener('click', (e) => this._handleDelete(e));
         elementBtn.addEventListener('click', () => this._handleOpenPopup());
     }
+
     _handleLike() {
         this.classList.toggle(`element__like-button_active`);
     }
+
     _handleDelete(e) {
         e.target.closest('.element').remove();
     }
+
     _handleOpenPopup() {
         this._setFullView(this._link, this._name);
     }

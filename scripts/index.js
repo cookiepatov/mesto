@@ -1,4 +1,4 @@
-import { Card } from './Card.js';
+import { Card } from './card.js';
 import { initialCards } from './data/cards-data.js';
 import { settings } from './data/validation-settings.js'
 import { FormValidator } from './FormValidator.js';
@@ -136,7 +136,6 @@ function addCard(card) {
 function resetCardPopup() {
   popupCardForm.reset();
 }
-
 
 function init () {
   initiateValidation(forms);

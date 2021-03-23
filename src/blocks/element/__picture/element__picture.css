@@ -1,0 +1,25 @@
+.element__picture {
+  width: 100%;
+  height: 282px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width:960px) {
+  .element__picture {
+    height: calc((100vw - 114px - var(--scrollbar-width)) / 3);
+  }
+}
+
+@media screen and (max-width:690px) {
+  .element__picture {
+    height: calc((100vw - 55px - var(--scrollbar-width)) / 2);
+  }
+}
+
+@media screen and (max-width:420px) {
+  .element__picture {
+    height: calc(100vw - 38px - var(--scrollbar-width));
+  }
+}

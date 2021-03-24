@@ -1,9 +1,0 @@
-.popup__picture-container {
-  width: 100%;
-  height: 100%;
-  max-width: 75vw;
-  max-height: 75vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

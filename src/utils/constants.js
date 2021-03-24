@@ -25,4 +25,45 @@ const initialCards = [
   }
 ];
 
-export {initialCards};
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
+const forms = Array.from(document.querySelectorAll(validationSettings.formSelector));
+
+const elementsSelector = '.elements'
+const cardTemplateSelector = '#card-template';
+const popupProfileFormSelector = '.popup_type_profile'
+const popupCardFormSelector = '.popup_type_card';
+const popupFullViewSelector = '.popup_type_full-view';
+
+const openFormBtn = document.querySelector('.profile__edit-button');
+const addCardBtn = document.querySelector('.profile__add-button');
+
+const userSelectors = {
+  userNameSelector: '.profile__name',
+  userInfoSelector: '.profile__description'
+}
+const formConnectorData = {
+  formSelectors: ['.popup__input_type_name', '.popup__input_type_data'],
+  newDataKeys: ['userName', 'userInfo']
+}
+
+
+export {initialCards,
+  validationSettings,
+  forms,
+  elementsSelector,
+  cardTemplateSelector,
+  popupProfileFormSelector,
+  popupCardFormSelector,
+  popupFullViewSelector,
+  openFormBtn,
+  addCardBtn,
+  userSelectors,
+  formConnectorData
+};

@@ -4,6 +4,8 @@
   display: block;
   object-fit: cover;
   object-position: center;
+  transition: opacity 0.2s ease-in-out;
+  overflow: hidden;
 }
 
 @media screen and (max-width:960px) {
@@ -22,4 +24,9 @@
   .element__picture {
     height: calc(100vw - 38px - var(--scrollbar-width));
   }
+}
+
+
+.element__picture:hover {
+  opacity: 0.9;
 }

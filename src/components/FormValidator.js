@@ -1,11 +1,12 @@
 export default class FormValidator {
-  constructor(settings, formElement) {
+  constructor({inputSelector, submitButtonSelector, inputErrorClass, errorClass}, formElement) {
     this._formElement = formElement;
-    this._inputSelector = settings.inputSelector;
-    this._submitButtonSelector = settings.submitButtonSelector;
-    this._inputErrorClass = settings.inputErrorClass;
-    this._errorClass = settings.errorClass;
+    this._inputSelector = inputSelector;
+    this._submitButtonSelector = submitButtonSelector;
+    this._inputErrorClass = inputErrorClass;
+    this._errorClass = errorClass;
   }
+
   enableValidation() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     inputList.forEach(input => {
@@ -15,6 +16,7 @@ export default class FormValidator {
       })
     })
   }
+
   _validateInput(input) {
     const validationState = input.validity.valid;
     const errorMsg = this._formElement.querySelector(`.${input.id}-error`);

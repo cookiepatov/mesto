@@ -1,33 +1,34 @@
 export default class Card {
-  constructor(data, selector, setFullView) {
-      this._name = data.name;
-      this._link = data.link;
+  constructor({name, link}, selector, handleCardClick) {
+      this._name = name;
+      this._link = link;
       this._selector = selector;
-      this._setFullView = setFullView;
-  }
-
-  _getCardFromTemplate() {
-      const cardElement = document.querySelector(this._selector).content.cloneNode(true);
-      return cardElement
+      this._handleCardClick = handleCardClick;
   }
 
   createCard() {
-      this._newCard = this._getCardFromTemplate();
-      const pic = this._newCard.querySelector(`.element__picture`);
-      pic.src=this._link;
-      pic.alt=this._name;
-      this._newCard.querySelector(`.element__text`).textContent=this._name;
-      this._setEventListeners();
-      return this._newCard;
-    }
+    this._newCard = this._getCardFromTemplate();
+    const pic = this._newCard.querySelector(`.element__picture`);
+    pic.src=this._link;
+    pic.alt=this._name;
+    this._newCard.querySelector(`.element__text`).textContent=this._name;
+    this._setEventListeners();
+    return this._newCard;
+}
+
+  _getCardFromTemplate() {
+      return document.querySelector(this._selector).content.cloneNode(true);
+  }
 
   _setEventListeners() {
       const heartBtn = this._newCard.querySelector(`.element__like-button`);
       const deleteBtn = this._newCard.querySelector(`.element__delete-button`);
       const elementBtn = this._newCard.querySelector(`.element__picture-button`);
       heartBtn.addEventListener('click', this._handleLike);
-      deleteBtn.addEventListener('click', (e) => this._handleDelete(e));
-      elementBtn.addEventListener('click', () => this._handleOpenPopup());
+      deleteBtn.addEventListener('click',
+       (e) => this._handleDelete(e));
+      elementBtn.addEventListener('click',
+       () => this._handleCardClick(this._link, this._name));
   }
 
   _handleLike() {
@@ -36,9 +37,5 @@ export default class Card {
 
   _handleDelete(e) {
       e.target.closest('.element').remove();
-  }
-
-  _handleOpenPopup() {
-      this._setFullView(this._link, this._name);
   }
 }

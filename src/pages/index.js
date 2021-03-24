@@ -36,11 +36,15 @@ function setScrollbarWidth() {
 
 
 function init () {
+  function createCardItem(item) {
+    return new Card(item, cardTemplateSelector, ()=>{popupFullView.open(item)})
+  }
+
   initiateValidation(forms);
   setScrollbarWidth();
 
   const cardsSection = new Section({items: initialCards, renderer: (item)=>{
-    const card = new Card(item, cardTemplateSelector, ()=>{popupFullView.open(item)});
+    const card = createCardItem(item);
     return card.createCard();
   }}, elementsSelector);
 
@@ -69,7 +73,7 @@ function init () {
         name: inputValues[0],
         link: inputValues[1]
       }
-      cardsSection.addItem(new Card(item, cardTemplateSelector, ()=>{popupFullView.open(item)}).createCard());
+      cardsSection.addItem(createCardItem(item).createCard());
       popupNewCard.close();
   })
   popupNewCard.setEventListeners();

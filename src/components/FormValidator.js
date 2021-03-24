@@ -5,14 +5,15 @@ export default class FormValidator {
     this._submitButtonSelector = submitButtonSelector;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    this._button = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   enableValidation() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    inputList.forEach(input => {
+    this._inputList.forEach(input => {
       input.addEventListener('input', () => {
         this._validateInput(input);
-        this._validateForm(inputList);
+        this._validateForm(this._inputList);
       })
     })
   }
@@ -34,12 +35,11 @@ export default class FormValidator {
     this._setFormState(validationState);
   }
   _setFormState(validationState){
-    const button = this._formElement.querySelector(this._submitButtonSelector);
     if(validationState) {
-      this._enableButton(button);
+      this._enableButton(this._button);
     }
     else {
-      this._disableButton(button);
+      this._disableButton(this._button);
     }
   }
   _showErrorMessage(input, errorElement, errorText) {

@@ -11,6 +11,7 @@
   height: 19.3px;
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;
+  padding: 0;
 }
 
 

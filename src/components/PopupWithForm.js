@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
     this._submitForm = submitForm;
     this._body = document.querySelector('.body');
     this._formInputs = this._popup.querySelectorAll('.popup__input');
+    this._button = this._popup.querySelector('.popup__button');
+    this._buttonText = this._button.textContent;
   }
 
   close() {
@@ -23,6 +25,20 @@ export default class PopupWithForm extends Popup {
     formConnectorData.formSelectors.forEach((object, index) => {
       this._popup.querySelector(object).value = values[formConnectorData.newDataKeys[index]];
     })
+  }
+
+  setLoading() {
+    const dots = ['.','..','...'];
+    let i=0
+    this._interval = setInterval(()=>{
+      this._button.textContent='Сохранение'+dots[i];
+      i=(i===2)?0:i+1;
+    },500)
+  }
+
+  setLoaded() {
+    this._button.textContent=this._buttonText;
+    clearInterval(this._interval);
   }
 
   _clearValues() {

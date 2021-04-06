@@ -13,7 +13,7 @@ const cardTemplateSelector = '#card-template';
 const popupProfileFormSelector = '.popup_type_profile'
 const popupCardFormSelector = '.popup_type_card';
 const popupFullViewSelector = '.popup_type_full-view';
-const popupDeleteCardSelector = '.popup_type_delete_confirm';
+const popupDeleteCardSelector = '.popup_type_delete-confirm';
 const popupChangeAvatar = '.popup_type_avatar';
 
 const openFormBtn = document.querySelector('.profile__edit-button');

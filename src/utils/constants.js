@@ -6,7 +6,9 @@ const validationSettings = {
   errorClass: 'popup__error_visible',
 };
 
-const forms = Array.from(document.querySelectorAll(validationSettings.formSelector));
+const formProfile = document.querySelector('.popup__form_type_edit-profile-info');
+const formNewCard = document.querySelector('.popup__form_type_add-place');
+const formAvatar = document.querySelector('.popup__form_type_change-avatar');
 
 const elementsSelector = '.elements'
 const cardTemplateSelector = '#card-template';
@@ -47,7 +49,9 @@ const apiData = {
 
 export {
   validationSettings,
-  forms,
+  formProfile,
+  formNewCard,
+  formAvatar,
   elementsSelector,
   cardTemplateSelector,
   popupProfileFormSelector,

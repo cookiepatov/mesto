@@ -2,7 +2,9 @@ import './index.css'
 
 import {
   validationSettings,
-  forms,
+  formProfile,
+  formNewCard,
+  formAvatar,
   elementsSelector,
   cardTemplateSelector,
   popupProfileFormSelector,
@@ -30,40 +32,39 @@ import UserInfo from '../components/UserInfo'
 import Api from '../components/Api'
 
 
-function initiateValidation(forms) {
-  forms.forEach(form => {
-    const formValidator = new FormValidator(validationSettings, form);
-    formValidator.enableValidation();
-  })
-}
-
 function setScrollbarWidth() {
   document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.clientWidth) + "px");
 }
 
-
 function init() {
 
-  initiateValidation(forms);
   setScrollbarWidth();
 
+  const validatorFormProfile = new FormValidator(validationSettings, formProfile);
+  validatorFormProfile.enableValidation();
+
+  const validatorFormNewCard = new FormValidator(validationSettings, formNewCard);
+  validatorFormNewCard.enableValidation();
+
+  const validatorFormAvatar = new FormValidator(validationSettings, formAvatar);
+  validatorFormAvatar.enableValidation();
+
   let cardsSection;
+
   const userInfo = new UserInfo(userSelectors);
   const api = new Api(apiData);
 
-  api.getUserInfo().then(result => {
-    userInfo.setAvatar(result.avatar);
-    userInfo.setUserInfo(result.name, result.about, result._id);
-    api.getInitialCards().then(result => {
-      cardsSection = new Section({
-        items: result, renderer: (item) => {
-          return createCardItem(item);
-        }
-      }, elementsSelector);
-      cardsSection.renderItems();
-    })
-    .catch(console.log);
 
+  Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([{name, about, _id, avatar}, cards])=>{
+    userInfo.setAvatar(avatar);
+    userInfo.setUserInfo(name, about, _id);
+    cardsSection = new Section({
+      items: cards, renderer: (item) => {
+        return createCardItem(item);
+      }
+    }, elementsSelector);
+    cardsSection.renderItems();
   })
   .catch(console.log);
 
@@ -77,28 +78,30 @@ function init() {
         popupDeleteCard.open(obj, id)
       },
       (id) => {
+        newCard.setLikeLoading();
         if (!newCard.isLiked) {
-          api.likeCard(id).then(result => {
-            newCard.toggleLike(result.likes.length)
+          api.likeCard(id).then(({likes}) => {
+            newCard.toggleLike(likes.length)
           })
             .catch(console.log)
+            .finally(()=>{newCard.setLikeLoaded()});
         } else {
-          api.dislikeCard(id).then(result => {
-            newCard.toggleLike(result.likes.length);
+          api.dislikeCard(id).then(({likes}) => {
+            newCard.toggleLike(likes.length);
           })
             .catch(console.log)
+            .finally(()=>{newCard.setLikeLoaded()});
         }
       })
     return newCard.createCard();
   }
-
 
   const popupDeleteCard = new PopupDeleteCard(popupDeleteCardSelector,
     (e, object, id) => {
       e.preventDefault();
       popupDeleteCard.setLoading();
       api.deleteCard(id).then(() => {
-        object.remove();
+        object.deleteCard();
         popupDeleteCard.close();
       })
         .catch(console.log)
@@ -110,8 +113,8 @@ function init() {
     (e, inputValues) => {
       e.preventDefault();
       popupProfile.setLoading();
-      api.setUserInfo(...inputValues).then(result => {
-        userInfo.setUserInfo(result.name, result.about);
+      api.setUserInfo(...inputValues).then(({name, about}) => {
+        userInfo.setUserInfo(name, about);
         popupProfile.close();
       })
         .catch(console.log)
@@ -140,8 +143,8 @@ function init() {
     (e, inputValues)=> {
     e.preventDefault();
     popupAvatar.setLoading();
-    api.setUserAvatar(...inputValues).then(result => {
-      userInfo.setAvatar(result.avatar);
+    api.setUserAvatar(...inputValues).then(({avatar}) => {
+      userInfo.setAvatar(avatar);
       popupAvatar.close();
     })
     .catch(console.log)
@@ -150,17 +153,20 @@ function init() {
   popupAvatar.setEventListeners();
 
   addCardBtn.addEventListener('click', () => {
+    validatorFormNewCard.resetValidation();
     popupNewCard.open();
   })
 
   changeAvatarBtn.addEventListener('click',() => {
-    popupAvatar.setValues(userInfo.getAvatarSrc(), avatarConnectorData)
+    validatorFormAvatar.resetValidation();
+    popupAvatar.setValues(userInfo.getAvatarSrc(), avatarConnectorData);
     popupAvatar.open();
   })
 
   openFormBtn.addEventListener('click', () => {
+    validatorFormProfile.resetValidation();
+    popupProfile.setValues(userInfo.getUserInfo(), formConnectorData);
     popupProfile.open();
-    popupProfile.setValues(userInfo.getUserInfo(), formConnectorData)
   });
 
 }

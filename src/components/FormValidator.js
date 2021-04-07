@@ -7,6 +7,7 @@ export default class FormValidator {
     this._errorClass = errorClass;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._button = this._formElement.querySelector(this._submitButtonSelector);
+    this._buttonDefaultDisabled = this._button.disabled;
   }
 
   enableValidation() {
@@ -18,9 +19,13 @@ export default class FormValidator {
     })
   }
 
+  _getErrorMsg(input) {
+    return this._formElement.querySelector(`.${input.id}-error`)
+  }
+
   _validateInput(input) {
     const validationState = input.validity.valid;
-    const errorMsg = this._formElement.querySelector(`.${input.id}-error`);
+    const errorMsg = this._getErrorMsg(input);
     const errorText = input.validationMessage;
     if(validationState) {
       this._hideErrorMessage(input, errorMsg);
@@ -36,10 +41,10 @@ export default class FormValidator {
   }
   _setFormState(validationState){
     if(validationState) {
-      this._enableButton(this._button);
+      this._enableButton();
     }
     else {
-      this._disableButton(this._button);
+      this._disableButton();
     }
   }
   _showErrorMessage(input, errorElement, errorText) {
@@ -47,15 +52,29 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
     errorElement.textContent=errorText;
   }
+
   _hideErrorMessage(input, errorElement) {
     input.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
-  _enableButton (button) {
-    button.disabled = false;
+
+  _enableButton () {
+    this._button.disabled = false;
   }
-  _disableButton (button) {
-    button.disabled = true;
+
+  _disableButton () {
+    this._button.disabled = true;
+  }
+
+  resetValidation() {
+    this._inputList.forEach(input=>{
+      this._hideErrorMessage(input, this._getErrorMsg(input));
+    })
+    if(this._buttonDefaultDisabled) {
+      this._disableButton();
+    } else {
+      this._enableButton();
+    };
   }
 }

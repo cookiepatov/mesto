@@ -50,6 +50,4 @@ export default class PopupWithForm extends Popup {
     .map(element=> element.value);
   }
 
-
-
 }

@@ -5,18 +5,21 @@ export default class Api {
     this._contentType = options.headers['Content-Type'];
   }
 
+  _resultHandler(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
       headers: {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(res => this._resultHandler(res));
   }
 
   getUserInfo() {
@@ -24,13 +27,7 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    }).then(res => this._resultHandler(res));
 
   }
 
@@ -45,13 +42,7 @@ export default class Api {
         name: name,
         about: about
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    }).then(res => this._resultHandler(res));
   }
 
   setUserAvatar(src) {
@@ -65,13 +56,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: src
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);;
-      });
+    }).then(res => this._resultHandler(res));
 
   }
 
@@ -86,13 +71,7 @@ export default class Api {
         name: name,
         link: link
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);;
-      });
+    }).then(res => this._resultHandler(res));
   }
 
   deleteCard(id) {
@@ -101,13 +80,7 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);;
-      });
+    }).then(res => this._resultHandler(res));
   }
 
   likeCard(id) {
@@ -116,13 +89,7 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);;
-      });
+    }).then(res => this._resultHandler(res));
   }
 
   dislikeCard(id) {
@@ -131,12 +98,6 @@ export default class Api {
       headers: {
         authorization: this._token
       }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);;
-      });
+    }).then(res => this._resultHandler(res));
   }
 }

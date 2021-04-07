@@ -39,7 +39,7 @@
         <h2 class="popup__title">
           Редактировать профиль
         </h2>
-        <form class="popup__form" name="edit-profile-info" novalidate>
+        <form class="popup__form popup__form_type_edit-profile-info" name="edit-profile-info" novalidate>
           <input id="profile-name-input" name="name" required  minlength="2" maxlength="40" class="popup__input popup__input_type_name" placeholder="Ваше имя">
           <span class="popup__error profile-name-input-error">Вы пропустили это поле.</span>
           <input id="profile-description-input" name="description" required minlength="2" maxlength="200" class="popup__input popup__input_type_data" placeholder="Описание">
@@ -54,7 +54,7 @@
         <h2 class="popup__title">
           Новое место
         </h2>
-        <form class="popup__form" name="add-place" novalidate>
+        <form class="popup__form popup__form_type_add-place" name="add-place" novalidate>
           <input id="place-name-input" name="name" required minlength="2" maxlength="30" class="popup__input popup__input_type_name" placeholder="Название">
           <span class="popup__error place-name-input-error">Вы пропустили это поле.</span>
           <input id="place-link-input" name="data" required type="url" class="popup__input popup__input_type_data" placeholder="Ссылка на картинку">
@@ -80,9 +80,9 @@
         <h2 class="popup__title">
           Обновить аватар
         </h2>
-        <form class="popup__form" name="change-avatar" novalidate>
+        <form class="popup__form popup__form_type_change-avatar" name="change-avatar" novalidate>
           <input id="avatar-link-input" name="data" required type="url" class="popup__input popup__input_type_data" placeholder="Ссылка на аватар">
-          <span class="popup__error place-link-input-error">Вы пропустили это поле.</span>
+          <span class="popup__error avatar-link-input-error">Вы пропустили это поле.</span>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
       </div>

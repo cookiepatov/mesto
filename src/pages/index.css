@@ -31,6 +31,7 @@
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__like-counter/element__like-counter.css);
 @import url(../blocks/element/__like-button/_active/element__like-button_active.css);
+@import url(../blocks/element/__like-button/_loading/element__like-button_loading.css);
 
 @import url(../blocks/footer/footer.css);
 

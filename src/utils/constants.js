@@ -20,6 +20,8 @@ const openFormBtn = document.querySelector('.profile__edit-button');
 const addCardBtn = document.querySelector('.profile__add-button');
 const changeAvatarBtn = document.querySelector('.profile__avatar-button');
 
+const wrongImagePlaceHolderSrc = 'https://images.unsplash.com/photo-1506702315536-dd8b83e2dcf9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+
 const userSelectors = {
   userNameSelector: '.profile__name',
   userInfoSelector: '.profile__description',
@@ -59,5 +61,6 @@ export {
   userSelectors,
   formConnectorData,
   avatarConnectorData,
-  apiData
+  apiData,
+  wrongImagePlaceHolderSrc
 };

@@ -1,6 +1,6 @@
 export default class Card {
   constructor({ name, link, likes, _id }, selector,
-    cardOwnerIsCurrent = true, isLiked = false,
+    cardOwnerIsCurrent = true, isLiked = false, wrongImagePlaceHolder,
     handleCardClick, handleDeleteCard, handleLikeClick) {
     this._name = name;
     this._link = link;
@@ -12,6 +12,7 @@ export default class Card {
     this._cardOwnerIsCurrent = cardOwnerIsCurrent;
     this._id = _id;
     this.isLiked = isLiked;
+    this.wrongImagePlaceHolder = wrongImagePlaceHolder;
   }
 
   createCard() {
@@ -31,6 +32,8 @@ export default class Card {
 
     pic.src = this._link;
     pic.alt = this._name;
+    pic.onerror = ()=>{pic.src = this.wrongImagePlaceHolder};
+    ;
     this._likeCounter.textContent = this._likes.length;
     this._newCard.querySelector(`.element__text`).textContent = this._name;
     this._setEventListeners();

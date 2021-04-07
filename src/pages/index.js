@@ -16,7 +16,8 @@ import {
   userSelectors,
   formConnectorData,
   avatarConnectorData,
-  apiData
+  apiData,
+  wrongImagePlaceHolderSrc
 } from '../utils/constants.js'
 
 import Card from '../components/Card';
@@ -68,9 +69,9 @@ function init() {
 
   function createCardItem(item) {
     const cardOwnerIsCurrent = (item.owner._id === userInfo.userId);
-    const isLiked = (item.likes.find(user => (user._id === userInfo.userId)));
+    const isLiked = item.likes.find(user => user._id === userInfo.userId);
     const newCard = new Card(item, cardTemplateSelector,
-      cardOwnerIsCurrent, isLiked,
+      cardOwnerIsCurrent, isLiked, wrongImagePlaceHolderSrc,
       () => { popupFullView.open(item) },
       (obj, id) => {
         popupDeleteCard.open(obj, id)
@@ -152,7 +153,7 @@ function init() {
     popupNewCard.open();
   })
 
-  changeAvatarBtn.addEventListener('click',()=>{
+  changeAvatarBtn.addEventListener('click',() => {
     popupAvatar.setValues(userInfo.getAvatarSrc(), avatarConnectorData)
     popupAvatar.open();
   })

@@ -15,11 +15,12 @@ export default class UserInfo {
     this.userId = userId;
   }
   setAvatar(avatarSrc) {
+    this._userAvatar = avatarSrc
     this._userAvatarObj.src = avatarSrc;
     this._userAvatarObj.onerror = ()=>{this._userAvatarObj.src = this._wrongImagePlaceHolder};
 
   }
   getAvatarSrc() {
-    return {link: this._userAvatarObj.src};
+    return {link: this._userAvatar};
   }
 }

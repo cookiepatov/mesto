@@ -51,7 +51,7 @@ function init() {
 
   let cardsSection;
 
-  const userInfo = new UserInfo(userSelectors);
+  const userInfo = new UserInfo(userSelectors, wrongImagePlaceHolderSrc);
   const api = new Api(apiData);
 
 
@@ -136,7 +136,7 @@ function init() {
     })
   popupNewCard.setEventListeners();
 
-  const popupFullView = new PopupWithImage(popupFullViewSelector);
+  const popupFullView = new PopupWithImage(popupFullViewSelector, wrongImagePlaceHolderSrc);
   popupFullView.setEventListeners();
 
   const popupAvatar = new PopupWithForm(popupChangeAvatar,

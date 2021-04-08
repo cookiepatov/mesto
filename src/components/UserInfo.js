@@ -1,8 +1,9 @@
 export default class UserInfo {
-  constructor({userNameSelector, userInfoSelector, userAvatarSelector}) {
+  constructor({userNameSelector, userInfoSelector, userAvatarSelector}, wrongImagePlaceHolder) {
     this._userNameObj = document.querySelector(userNameSelector);
     this._userInfoObj = document.querySelector(userInfoSelector);
     this._userAvatarObj = document.querySelector(userAvatarSelector);
+    this._wrongImagePlaceHolder = wrongImagePlaceHolder;
     this.userId = 0;
   }
   getUserInfo() {
@@ -15,6 +16,8 @@ export default class UserInfo {
   }
   setAvatar(avatarSrc) {
     this._userAvatarObj.src = avatarSrc;
+    this._userAvatarObj.onerror = ()=>{this._userAvatarObj.src = this._wrongImagePlaceHolder};
+
   }
   getAvatarSrc() {
     return {link: this._userAvatarObj.src};
